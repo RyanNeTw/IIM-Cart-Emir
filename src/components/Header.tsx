@@ -13,10 +13,10 @@ const Header = () => {
 
     return (
         <>
-            <header className="bg-yellow w-full px-big py-mid flex flex-row justify-between">
+            <header className="bg-yellow w-full px-big py-mid flex flex-row justify-between items-center">
                 <Link to={'/'}>
-                    <h1 className="text-dark cursor-pointer">
-                        Welcome to your market
+                    <h1 className="text-dark cursor-pointer uppercase font-bold">
+                        Home
                     </h1>
                 </Link>
                 <button

@@ -9,7 +9,7 @@ const MainPage = () => {
         <>
             <div className="px-page py-big">
                 <Title title="Products :" />
-                <ul className="flex flex-wrap gap-mid">
+                <ul className="flex flex-wrap gap-big">
                     {data?.map((product, index) => (
                         <li key={index}>
                             <ProductCard product={product} />

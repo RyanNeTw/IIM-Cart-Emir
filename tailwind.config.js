@@ -10,8 +10,8 @@ export default {
                 big: '1rem',
             },
             colors: {
-                yellow: '#ffebbc',
-                cyan: '#5da7ae',
+                yellow: '#FFFFFF',
+                cyan: '#3A4F41',
                 brown: '#543d46',
                 dark: '#292830',
             },

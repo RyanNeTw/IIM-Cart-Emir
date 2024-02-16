@@ -1,12 +1,15 @@
 import { Dispatch, FC, SetStateAction, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import MinusSvg from '../assets/Minus'
+import PlusSvg from '../assets/Plus'
 import { StoreContext } from '../store/store'
 import { Products } from '../types'
 
-const ProductCard: FC<{ product: Products; addOrRemoveCart?: boolean }> = ({
-    product,
-    addOrRemoveCart = true,
-}) => {
+const ProductCard: FC<{
+    product: Products
+    addOrRemoveCart?: boolean
+    link?: boolean
+}> = ({ product, addOrRemoveCart = true, link = true }) => {
     const [done, setDone] = useState<boolean>(false)
 
     if (done) {
@@ -17,27 +20,39 @@ const ProductCard: FC<{ product: Products; addOrRemoveCart?: boolean }> = ({
 
     return (
         <>
-            <div className="bg-yellow px-big py-mid rounded-xl flex flex-col gap-mid shadow hover:shadow-lg hover:scale-105 cursor-pointer">
-                <Link
-                    to={`/product/${product.id}`}
-                    className="flex flex-col gap-mid"
-                >
-                    <h3 className="text-dark">{product.title}</h3>
+            <div className="bg-yellow px-mid py-mid rounded-xl flex flex-col gap-mid shadow hover:shadow-lg hover:scale-105">
+                <div className="flex flex-row gap-big">
                     <img
-                        className="w-16 h-16 bg-center rounded-lg bg-no-repeat bg-cover bg-white-color shadow-sm"
+                        className="w-32 h-full bg-contain rounded-lg bg-no-repeat bg-cover bg-white-color shadow-sm"
                         src={product.image}
                     />
-                    <h3 className="text-dark">{product.price}$</h3>
-                </Link>
-                {addOrRemoveCart ? (
-                    <AddToCartButton
-                        product={product}
-                        done={done}
-                        setDone={setDone}
-                    />
-                ) : (
-                    <RemoveToCartButton product={product} />
-                )}
+                    <div className="flex flex-col justify-between">
+                        <h3 className="text-dark font-bold uppercase">
+                            {product.title}
+                        </h3>
+                        <h3 className="text-dark">Price : {product.price}$</h3>
+                        <div className="flex flex-row gap-2 items-center justify-end">
+                            {link && (
+                                <Link
+                                    to={`/product/${product.id}`}
+                                    className="flex flex-col gap-mid"
+                                >
+                                    {' '}
+                                    <h4 className="cursor-pointer">More...</h4>
+                                </Link>
+                            )}
+                            {addOrRemoveCart ? (
+                                <AddToCartButton
+                                    product={product}
+                                    done={done}
+                                    setDone={setDone}
+                                />
+                            ) : (
+                                <RemoveToCartButton product={product} />
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
@@ -65,11 +80,11 @@ const AddToCartButton: FC<{
 
     return (
         <button
-            className={`${done ? 'animate-ping' : ''} bg-cyan text-white rounded-xl py-small px-big hover:opacity-80 ${parseInt(product.quantity) <= 0 ? 'cursor-not-allowed' : ''}`}
+            className={`${done ? 'animate-ping' : ''} bg-cyan text-white rounded-full p-big hover:opacity-80 ${parseInt(product.quantity) <= 0 ? 'cursor-not-allowed' : ''}`}
             onClick={() => addToCart(product)}
             disabled={parseInt(product.quantity) <= 0 ? true : false}
         >
-            Add to cart
+            <PlusSvg />
         </button>
     )
 }
@@ -82,10 +97,10 @@ const RemoveToCartButton: FC<{ product: Products }> = ({ product }) => {
     }
     return (
         <button
-            className={`bg-cyan text-white rounded-xl py-small px-big hover:opacity-80`}
+            className={`bg-cyan text-white p-big hover:opacity-80 rounded-full`}
             onClick={() => removeToCart(product)}
         >
-            remove from cart
+            <MinusSvg />
         </button>
     )
 }

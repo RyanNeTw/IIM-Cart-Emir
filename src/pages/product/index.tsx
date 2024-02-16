@@ -21,8 +21,8 @@ const ArticlePage = () => {
 
     return (
         <>
-            <div className="px-page py-big flex flex-col gap-y-4">
-                <ProductCard product={product?.[0]} />
+            <div className="px-page py-big flex flex-col gap-y-4 items-start">
+                <ProductCard product={product?.[0]} link={false} />
                 <Title title="Commentaires :" />
                 <FormComment />
                 <ul className="flex flex-wrap gap-big pt-big">
