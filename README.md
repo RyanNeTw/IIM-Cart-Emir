@@ -1,8 +1,8 @@
-#IIM-Cart-Emir
+# IIM-Cart-Emir
 
 Welcome to this repo
 
-##Get Started
+## Get Started
 
 1 : Clone the repository and cd into it
 
@@ -10,7 +10,7 @@ Welcome to this repo
 
 3 : npm run dev
 
-##Verifications
+## Verifications
 
 Prettier : npm run prettier or npm run format:check
 
