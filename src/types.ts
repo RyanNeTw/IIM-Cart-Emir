@@ -5,9 +5,7 @@ export type Products = {
     image: string
     price: string
     quantity: string
-    unit_of_measurement: null | string
-    measure: null | string
-    price_per_measure: null | string
+    index: number
 }
 
 export type ProdutComments = {

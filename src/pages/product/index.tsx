@@ -10,7 +10,7 @@ import {
 } from '../../services/getData'
 
 const ArticlePage = () => {
-    let { id } = useParams()
+    const { id } = useParams()
     const { data } = useGetProductCommentsQuery(id)
     const { data: products, isLoading } = useGetProductsQuery()
     const product = products?.filter((i) => i?.id === id)

@@ -5,7 +5,7 @@ import { useSendProductCommentMutation } from '../services/getData'
 import { Comment, QueryResult } from '../types'
 
 const FormComment = () => {
-    let { id } = useParams()
+    const { id } = useParams()
     const [done, setDone] = useState<QueryResult>(QueryResult.NONE)
     const [createComment] = useSendProductCommentMutation()
 

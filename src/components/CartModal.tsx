@@ -1,12 +1,12 @@
-import { Dispatch, FC, SetStateAction } from 'react'
-import { useSelector } from 'react-redux'
+import { Dispatch, FC, SetStateAction, useContext } from 'react'
+import { StoreContext } from '../store/store'
 import ProductCard from './ProductCard'
 
 const CartModal: FC<{
     setShowModal: Dispatch<SetStateAction<boolean>>
     showModal: boolean
 }> = ({ setShowModal, showModal }) => {
-    const products = useSelector((state) => state.cart.products)
+    const { cart } = useContext(StoreContext)
     const closeModal = () => {
         setShowModal(!showModal)
     }
@@ -17,8 +17,8 @@ const CartModal: FC<{
                 <div className="bg-white p-8 rounded-lg shadow-lg">
                     <h2 className="font-bold text-xl mb-4">Cart</h2>
                     <ul className="max-h-72 overflow-hidden overflow-scroll flex flex-col gap-y-big px-big">
-                        {products?.length > 0 ? (
-                            products?.map((product, index) => (
+                        {cart?.length > 0 ? (
+                            cart?.map((product, index) => (
                                 <li key={index}>
                                     <ProductCard
                                         product={product}

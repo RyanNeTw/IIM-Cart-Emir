@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { StoreContext } from '../store/store'
 import CartModal from './CartModal'
 
 const Header = () => {
     const [showModal, setShowModal] = useState<boolean>(false)
-    const products = useSelector((state) => state.cart.products)
+    const { cart } = useContext(StoreContext)
 
     const cartFunction = () => {
         setShowModal(!showModal)
@@ -23,7 +23,7 @@ const Header = () => {
                     onClick={() => cartFunction()}
                     className="bg-cyan px-big py-mid text-white rounded-xl"
                 >
-                    Cart : {products?.length}
+                    Cart : {cart?.length}
                 </button>
             </header>
             {showModal && (

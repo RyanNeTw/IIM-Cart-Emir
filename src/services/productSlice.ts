@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type Product = {
     id: string
-    index: string
+    index: number
     price: string
     title: string
     image: string

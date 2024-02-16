@@ -6,6 +6,10 @@ type CommentInterface = {
     body: Comment
 }
 
+const headers = {
+    'Content-Type': 'application/json',
+}
+
 export const etherialApi = createApi({
     reducerPath: 'etherialApi',
     tagTypes: ['comments'],
@@ -23,9 +27,7 @@ export const etherialApi = createApi({
                 url: `products/${id}/comments`,
                 method: 'POST',
                 body,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
             }),
             invalidatesTags: ['comments'],
         }),

@@ -3,7 +3,8 @@ import Title from '../../components/UI/Title'
 import { useGetProductsQuery } from '../../services/getData'
 
 const MainPage = () => {
-    const { data, error, isLoading } = useGetProductsQuery()
+    const { data } = useGetProductsQuery()
+
     return (
         <>
             <div className="px-page py-big">

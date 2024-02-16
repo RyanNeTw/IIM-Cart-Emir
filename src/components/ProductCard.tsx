@@ -1,7 +1,6 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { Dispatch, FC, SetStateAction, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { addProduct, Product, removeProduct } from '../services/productSlice'
+import { StoreContext } from '../store/store'
 import { Products } from '../types'
 
 const ProductCard: FC<{ product: Products; addOrRemoveCart?: boolean }> = ({
@@ -24,10 +23,10 @@ const ProductCard: FC<{ product: Products; addOrRemoveCart?: boolean }> = ({
                     className="flex flex-col gap-mid"
                 >
                     <h3 className="text-dark">{product.title}</h3>
-                    <div
+                    <img
                         className="w-16 h-16 bg-center rounded-lg bg-no-repeat bg-cover bg-white-color shadow-sm"
-                        style={{ backgroundImage: `url(${product.image})` }}
-                    ></div>
+                        src={product.image}
+                    />
                     <h3 className="text-dark">{product.price}$</h3>
                 </Link>
                 {addOrRemoveCart ? (
@@ -48,20 +47,20 @@ const AddToCartButton: FC<{
     product: Products
     done: boolean
     setDone: Dispatch<SetStateAction<boolean>>
-}> = ({ product, done, setDone }) => {
-    const dispatch = useDispatch()
-    const cart = useSelector((state) => state.cart.products)
+}> = ({ product, done }) => {
+    const { cart, setCart } = useContext(StoreContext)
 
     const addToCart = (product: Products) => {
-        const i: Product = {
+        const i: Products = {
             id: product.id,
             title: product.title,
             image: product.image,
             price: product.price,
             index: cart?.length,
+            date: null,
+            quantity: null,
         }
-        dispatch(addProduct(i))
-        setDone(!done)
+        setCart([...cart, i])
     }
 
     return (
@@ -76,9 +75,10 @@ const AddToCartButton: FC<{
 }
 
 const RemoveToCartButton: FC<{ product: Products }> = ({ product }) => {
-    const dispatch = useDispatch()
-    const removeToCart = (product) => {
-        dispatch(removeProduct(product))
+    const { cart, setCart } = useContext(StoreContext)
+    const removeToCart = (product: Products) => {
+        const newCart = cart.filter((i) => i.index !== product.index)
+        setCart(newCart)
     }
     return (
         <button
